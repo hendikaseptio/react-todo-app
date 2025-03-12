@@ -1,8 +1,8 @@
 import React from "react";
 
-function Task(props) {
+function Task({task, index}) {
     return (
-        <li>{props.task}</li>
+        <li>{task}</li>
     )
 }
 
