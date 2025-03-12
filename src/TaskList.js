@@ -2,19 +2,29 @@ import React, { useState } from "react";
 import Task from "./Task";
 
 function TaskList() {
-    const [tasks, setTasks] = useState(['Belajar React', 'Belajar React Native', 'Belajar Laravel']);
+    const [tasks, setTasks] = useState([
+        {task:"Belajar React", isDone: false}, 
+        {task:"Belajar React Native", isDone: false}, 
+        {task:"Belajar Laravel", isDone: false}
+        ]);
 
     // fungsi tambah task
     const addTask = (task) => {
-        setTasks([...tasks, task]);
+        setTasks([...tasks, {task, isDone: false}]);
     }
 
+    const markAsDone = (index) => {
+        const updatedTasks = tasks.map((task, idx) =>  
+            idx === index ? {...task, isDone: !task.isDone} : task
+        );
+        setTasks(updatedTasks);
+    }
     return (
         <div>   
             <h2>Task List</h2>
             <ul>
                 {tasks.map((task, index) => (
-                    <Task key={index} task={task}></Task>
+                    <Task key={index} task={task} markAsDone={markAsDone} index={index}></Task>
                 ))}
             </ul>
             <AddTaskForm addTask={addTask} />
