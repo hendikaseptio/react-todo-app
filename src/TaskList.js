@@ -13,6 +13,12 @@ function TaskList() {
         setTasks([...tasks, {task, isDone: false}]);
     }
 
+    // fungsi hapus task
+    const removeTask = (index) => {
+        const updatedTasks = tasks.filter((task, idx) => idx !== index);
+        setTasks(updatedTasks);
+    }
+
     const markAsDone = (index) => {
         const updatedTasks = tasks.map((task, idx) =>  
             idx === index ? {...task, isDone: !task.isDone} : task
@@ -24,7 +30,7 @@ function TaskList() {
             <h2>Task List</h2>
             <ul>
                 {tasks.map((task, index) => (
-                    <Task key={index} task={task} markAsDone={markAsDone} index={index}></Task>
+                    <Task key={index} task={task} markAsDone={markAsDone} removeTask={removeTask} index={index}></Task>
                 ))}
             </ul>
             <AddTaskForm addTask={addTask} />
